@@ -16,12 +16,7 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 /* =====================
   Lab 2, Part 1 - jQuery
 
-  In this course, we've set our focus on HTML, CSS, & Javascript as they are useful in the construction
-  of mapping applications. One thing that isn't yet clear is how to handle user input. This is difficult
-  because we've got to expand our thinking to span HTML and javascript - the fields with which
-  a users can interact are ultimately specified in HTML <input> elements. Luckily, we've already seen
-  how CSS solves this problem (with the use of selectors) and can extend that syntax into our work
-  with javascript.
+  In this course, we've set our focus on HTML, CSS, & Javascript as they are useful in the construction of mapping applications. One thing that isn't yet clear is how to handle user input. This is difficult because we've got to expand our thinking to span HTML and javascript - the fields with which a users can interact are ultimately specified in HTML <input> elements. Luckily, we've already seen how CSS solves this problem (with the use of selectors) and can extend that syntax into our work with javascript.
 
   A few reminders about the basic forms of CSS selector:
   1. The simplest selector case is specification of a tag directly. The selector "p" will grab all
@@ -51,10 +46,7 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
   In jQuery, we use this syntax as well. It looks like this: $(*selector*); We could, for instance,
   grab all h4 movie-titles with $('h4.movie-title');
 
-  Many of the exercises in this portion of lab 2 involve reading and writing to HTML inputs with the
-  help of jQuery selectors and associated methods for querying the DOM. The method you'll use again
-  and again on this lab is jQuery's `val`. With no arguments, it queries an input value. Provided
-  a value as an argument, it will actually set that value in the HTML DOM.
+  Many of the exercises in this portion of lab 2 involve reading and writing to HTML inputs with the help of jQuery selectors and associated methods for querying the DOM. The method you'll use again and again on this lab is jQuery's `val`. With no arguments, it queries an input value. Provided a value as an argument, it will actually set that value in the HTML DOM.
 
   Example:
     Reading: $(someSelector).val();
@@ -83,14 +75,10 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
     *NOTE*: An input's value is not the same as an HTML element's text. We use $(selector).val() as
             opposed to $(selector).text() in this case.
 
-    Fill out the input form with some imagined values. If you chose to make the form about the
-    properties of people, the name might be 'bob' and the favorite color could be green (hint: you'll
-    want to get formatting exactly right to set a color field; experiment in the console to see what
-    the color you'll specify should look like).
+    Fill out the input form with some imagined values. If you chose to make the form about the properties of people, the name might be 'bob' and the favorite color could be green (hint: you'll want to get formatting exactly right to set a color field; experiment in the console to see what the color you'll specify should look like).
 
   Task 3: Getting (reading) input values
-    Write the code necessary to read from your input form and return a javascript object (with keys
-    to clarify the meaning of each value) that has all the data that's stored in your form.
+    Write the code necessary to read from your input form and return a javascript object (with keys to clarify the meaning of each value) that has all the data that's stored in your form.
 
   Task 4: Enable user interaction with the form
     At this point, we're really only using HTML input fields as a kind of storage. We create some data,
@@ -128,26 +116,101 @@ var Stamen_TonerLite = L.tileLayer('http://stamen-tiles-{s}.a.ssl.fastly.net/ton
 
   // STRETCH GOALS
   Task 7: Use default values - OPTIONAL
-    We don't want the application to crash if our user fails to enter values for every field. Add
-    whatever logic is necessary to set default values if a field is empty.
+    We don't want the application to crash if our user fails to enter values for every field. Add whatever logic is necessary to set default values if a field is empty.
 
   Task 8: Try Leaflet's divIcon
-    Instead of using a default leaflet marker or a circleMarker, try using a L.divIcon. A div icon
-    is just an HTML <div> element on which CSS can be applied (HINT: background-color or
-    background-image are necessary if you want to see the icon). When you've successfully implemented
-    a divIcon, you should be able to grab it by reference to its class: 'leaflet-marker-icon'. So,
-    in jQuery, $('.leaflet-marker-icon').
+    Instead of using a default leaflet marker or a circleMarker, try using a L.divIcon. A div icon is just an HTML <div> element on which CSS can be applied (HINT: background-color or background-image are necessary if you want to see the icon). When you've successfully implemented a divIcon, you should be able to grab it by reference to its class: 'leaflet-marker-icon'. So, in jQuery, $('.leaflet-marker-icon').
 
   Task 9: Make a parametric function (make it accept parameters/arguments) to fill the form out
-    At this point, we have an object which corresponds to a (at least partially) filled out form.
-    That being so, we should be able to write a function that accepts, as an argument,
-    one of those objects and properly fills out the form to match the values of that object. Try to
-    update the code below so that an object entered into your form-filling function is stored on the
-    HTML and fully reconstituted by the code you've written to read from the form.
+    At this point, we have an object which corresponds to a (at least partially) filled out form. That being so, we should be able to write a function that accepts, as an argument, one of those objects and properly fills out the form to match the values of that object. Try to update the code below so that an object entered into your form-filling function is stored on the HTML and fully reconstituted by the code you've written to read from the form.
 
     Use `_.isEqual` to make sure the object you feed in is the same as the one you read back out.
 ===================== */
 
+//Task 7: set default values
+//not working/implemented yet...(2016-02-16 0646PM)
+//function to set NA to fields left unfilled
+var checkEmpty = function(field, input){
+  if (input === '') {
+    field = 'NA';
+  }
+  else {
+    field = $('#text-input1').val();
+  }
+};
+
+
+
+
 $(document).ready(function() {
-  // Do your stuff here
+
+  //Task 1: change text of labels
+  $('#main-heading').text('Week 5 Lab 2 Part 1');
+  $('#text-label1').text('What is your title?');
+  $('#text-label2').text('What is your name?');
+  $('#text-label3').text('What is your address?');
+  $('#number-label').text('What is your age?');
+  $('#checkbox-label1').text('Are you a female?');
+  $('#checkbox-label2').text('Are you cool?');
+  $('#color-label').text('What is your favorite color?');
+  //Task 6: add lat/long
+  $('#number-label2').text('Latitude');
+  $('#number-label3').text('Longitude');
+
+  //Task 2: input values
+  $('#text-input1').val('Ms.');
+  $('#text-input2').val('Laura');
+  $('#text-input3').val('Philadelphia');
+  $('#numeric-input').val(26);
+  $('#cbox-input1').prop('checked', true);
+  $('#cbox-input2').prop('checked', true);
+  $('#color-input').val('#5588CC');
+  //Task 6: add lat/lng
+  $('#numeric-input2').val(39.952584);
+  $('#numeric-input3').val(-75.165222);
+
+  //Task 3: read the input values
+  //Task 5: button trigger to long input values to the console
+  //Task 6: add lat/lng & plot input
+  $('#button').on('click', function(){
+    var jsonObj = jsonObj || [];
+    var title   = $('#text-input1').val();
+        name    = $('#text-input2').val();
+        address = $('#text-input3').val();
+        age     = $('#numeric-input').val();
+        female  = $('#cbox-input1').prop('checked');
+        cool    = $('#cbox-input2').prop('checked');
+        color   = $('#color-input').val();
+        lat     = $('#numeric-input2').val();
+        lng     = $('#numeric-input3').val();
+    item = {};
+    item.title    = title;
+    item.name     = name;
+    item.address  = address;
+    item.age      = parseFloat(age);
+    item.female   = female;
+    item.cool     = cool;
+    item.color    = color;
+    item.lat      = parseFloat(lat);
+    item.lng      = parseFloat(lng);
+    jsonObj.push(item);
+    console.log(jsonObj);
+    //Task 6: plot input
+    var latLng = L.latLng(lat, lng);
+/*
+    //Task 8: L.divIcon
+    var icon = L.divIcon({
+      className: 'leaflet-marker-icon',
+      iconSize: [60,60]
+    });
+    var marker = L.marker(latLng, {
+      icon: icon
+    });
+  */
+    var marker = L.circleMarker(latLng, {
+      fillColor: color,
+      color: color
+    });
+    marker.addTo(map).bindPopup(name);
+  });
 });
