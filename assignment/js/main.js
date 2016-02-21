@@ -2,7 +2,7 @@
  Copy your code from Week 4 Lab 2 Part 2 part2-app-state.js in this space
 ===================== */
 
-
+/*
 //function to get and parse data
 var getData = function(urlInput){
   $.ajax(urlInput).done(function(result){
@@ -11,11 +11,9 @@ var getData = function(urlInput){
 };
 
 //function to make markers
-var makeMarkers = function(data, inputLat, inputLng) {
+var makeMarkers = function(data) {
   return _.map(data, function(i){
-    var latitude = i[inputLat];
-    var longitude = i[inputLng];
-    return L.marker([latitude, longitude]);
+    return L.marker([i[lat], i[lng]]);
   });
 };
 
@@ -26,23 +24,70 @@ var plotMarkers = function(data) {
   });
 };
 
+//function to remove markers (from nathan's code)
+var resetMap = function() {
+  _.each(markers, function(marker, i) {
+    map.removeLayer(marker);
+  });
+  markers = [];
+};
+*/
 
-//name the three datasets
+
+/*
+//the datasets
 var phillySolarInstallationDataUrl = "https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-solar-installations.json";
 var phillyBikeCrashesDataUrl = "https://raw.githubusercontent.com/CPLN690-MUSA610/datasets/master/json/philadelphia-bike-crashes-snippet.json";
+*/
 
 
 $(document).ready(function() {
   $('#button').on('click', function(){
-    //var jsonObj = jsonObj || [];
+    /*  // this section of code uses the functions defined above, but it doesn't work. I feel like it should be able to work without all the functions within the button click action by just calling the pre-defined functions above
     var url   = $('#url-input').val();
         lat   = $('#lat-input').val();
         lng   = $('#lng-input').val();
+    //resetMap();
     var data = getData(url);
     var markers = makeMarkers(data, lat, lng);
     plotMarkers(markers);
+    */
+    var url  = $.ajax($('#url-input').val());
+        lat  = $('#lat-input').val();
+        lng  = $('#lng-input').val();
+    //function to remove markers...not working at the moment...
+    var resetMap = function() {
+      markers = [];
+      return _.each(markers, function(marker, i) {
+        map.removeLayer(marker);
+      });
+    };
+    //function to get and parse data
+    var getData = function(data){
+      return JSON.parse(data);
+    };
+    //function to make markers
+    var makeMarkers = function(data) {
+      return _.map(data, function(i){
+        return L.marker([i[lat], i[lng]]);
+      });
+    };
+    //function to plot markers
+    var plotMarkers = function(data) {
+      return _.each(data, function(i){
+        i.addTo(map);
+      });
+    };
+    url.done(function(data){
+      //resetMap();     //not working...
+      var dataset = getData(data);
+      markers = makeMarkers(dataset);
+      plotMarkers(markers);
+    });
   });
 });
+
+
 
 
 
