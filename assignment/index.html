@@ -9,10 +9,28 @@
   <body>
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- =====================
-      Add elements in this space
-      ====================== -->
+      <h1 class = 'h1'>Header</h1>
+      <br>
+      <label id="url-label" for="url-input">Dataset URL:</label>
+      <input id="url-input" class="input-text" type="text">
+      <br>
+      <br>
+      <label id="lat-label" for="lat-input">Latitutde:</label>
+      <input id="lat-input" class="input-text" type="text">
+      <p class = 'hint-text'>For Solar: Y</p>
+      <p class = 'hint-text'>For Crashes: LAT</p>
+      <br>
+      <br>
+      <label id="lng-label" for="lng-input">Longitutde:</label>
+      <input id="lng-input" class="input-text" type="text">
+      <p class = 'hint-text'>For Solar: X</p>
+      <p class = 'hint-text'>For Crashes: LNG</p>
+      <br>
+      <br>
+      <button id = 'button' class = 'button'>Button</button>
     </div>
+
+
     <!-- Map -->
     <div id="map" class="map"></div>
     <!-- Javascript Imports -->

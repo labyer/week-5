@@ -1,7 +1,8 @@
 body {
     padding: 0;
     overflow: hidden;
-    font-family: helvetica, arial, sans-serif;
+    font-family: Garamond;
+    font-size: 18px;
 }
 
 .map {
@@ -20,4 +21,19 @@ body {
     bottom: 0;
     overflow-y: auto;
     padding: 20px;
+}
+
+.h1 {
+  font-family: Garamond;
+  font-size: 50px;
+}
+
+.input-text {
+  font-family: Garamond;
+  font-size: 18px;
+}
+
+.hint-text {
+  font-family: Garamond;
+  font-size: 12px;
 }
